@@ -24,7 +24,7 @@ public class Employee {
     @Column(name = "email_id")
     private String email;
     @Column(name = "phone_no")
-    private long phoneNo;
+    private String phoneNo;
     @Column(name = "doj")
     private Date doj;
     @Column(name = "salary")
@@ -33,7 +33,7 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(int employeeId, String firstName, String lastName, String email, long phoneNo, Date doj,
+    public Employee(int employeeId, String firstName, String lastName, String email, String phoneNo, Date doj,
             double salary) {
         this.employeeId = employeeId;
         this.firstName = firstName;
@@ -76,11 +76,11 @@ public class Employee {
         this.email = email;
     }
 
-    public long getPhoneNo() {
+    public String getPhoneNo() {
         return phoneNo;
     }
 
-    public void setPhoneNo(long phoneNo) {
+    public void setPhoneNo(String phoneNo) {
         this.phoneNo = phoneNo;
     }
 
