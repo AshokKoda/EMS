@@ -6,13 +6,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
-import org.apache.logging.log4j.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import com.example.employee.Entities.Employee;
 import com.example.employee.Exceptions.CustomExceptions;
 import com.example.employee.Repositories.EmployeeRepository;
