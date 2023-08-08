@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,13 +19,17 @@ public class EmployeeService {
     @Autowired
     public EmployeeRepository employeeRepository;
 
-    //SAVE EMPLOYEE
-    public void save(Employee employee) throws ParseException {
-        String strDate = new SimpleDateFormat("yyyy-MM-dd",   Locale.getDefault()).format(new Date());
+    // SAVE EMPLOYEE
+    public Employee save(Employee employee) throws ParseException {
+        String strDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date doj = df.parse(strDate);
         employee.setDoj(doj);
-        employeeRepository.save(employee);
+        return employeeRepository.save(employee);
     }
 
+    // GET EMPLOYEES
+    public List<Employee> getAllEmployees() {
+		return employeeRepository.findAll();
+	}
 }

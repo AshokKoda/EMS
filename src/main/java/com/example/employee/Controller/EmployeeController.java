@@ -1,9 +1,14 @@
 package com.example.employee.Controller;
 
 import java.text.ParseException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.employee.Entities.Employee;
@@ -16,8 +21,13 @@ public class EmployeeController {
     public EmployeeService employeeService;
 
     @PostMapping("/save/employee")
-    public void createEmployee(Employee employee) throws ParseException {
-        employeeService.save(employee);
-    }
+	public ResponseEntity<Employee> saveEmployee(@RequestBody Employee employee) throws ParseException{
+		return new ResponseEntity<Employee>(employeeService.save(employee), HttpStatus.CREATED);
+	}
+
+    @GetMapping("/getAllEmployees")
+	public List<Employee> getAllEmployees(){
+		return employeeService.getAllEmployees();
+	}
     
 }
