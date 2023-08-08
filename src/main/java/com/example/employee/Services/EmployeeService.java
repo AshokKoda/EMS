@@ -7,10 +7,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import org.apache.logging.log4j.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.example.employee.Entities.Employee;
+import com.example.employee.Exceptions.CustomExceptions;
 import com.example.employee.Repositories.EmployeeRepository;
 
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +27,7 @@ public class EmployeeService {
     public EmployeeRepository employeeRepository;
 
     // SAVE EMPLOYEE
-    public Employee save(Employee employee) throws ParseException {
+    public Employee save(Employee employee) throws ParseException, CustomExceptions {
         String fName = employee.getFirstName();
         String lName = employee.getLastName();
         String email = employee.getEmail();
@@ -31,7 +35,7 @@ public class EmployeeService {
         Double salary = employee.getSalary();
 
         if (fName.isEmpty() || lName.isEmpty() || email.isEmpty() || phoneNo.isEmpty() || salary <= 0) {
-            log.info("Some mandatory fields are missing!.");
+            throw new CustomExceptions("Some mandatory fields are missing!.");
         } else {
             String strDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
