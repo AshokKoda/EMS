@@ -74,4 +74,37 @@ public class EmployeeService {
         }
         return employee;
     }
+
+    // Employee Tax Deduction API with some rules
+    public Employee employeeTaxApiWithRules(Employee employee) throws CustomExceptions, ParseException {
+        String fName = employee.getFirstName();
+        String lName = employee.getLastName();
+        String email = employee.getEmail();
+        String phoneNo = employee.getPhoneNo();
+        Double salary = employee.getSalary();
+
+        Double taxDeduction = salary * 0.1;
+        Double netSalary = salary - taxDeduction;
+
+        if (fName.isEmpty() || lName.isEmpty() || email.isEmpty() || phoneNo.isEmpty() || salary <= 0) {
+            throw new CustomExceptions("Some mandatory fields are missing!.");
+        } else {
+            String strDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            Date doj = df.parse(strDate);
+            employee.setDoj(doj);
+
+            if (salary <= 250000) {
+                taxDeduction = 0.0;
+                netSalary = salary;
+            }
+
+            employee.setTax(taxDeduction);
+            employee.setNetSalary(netSalary);
+
+            employeeRepository.save(employee);
+            log.info("Employee added with salary successfully!.");
+        }
+        return employee;
+    }
 }

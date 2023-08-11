@@ -31,6 +31,11 @@ public class EmployeeController {
 		return new ResponseEntity<Employee>(employeeService.employeeWithTaxApi(employee), HttpStatus.CREATED);
 	}
 
+	@PostMapping("/save/employeeTaxApiWithRules")
+	public ResponseEntity<Employee> employeeTaxApiWithRules(@RequestBody Employee employee) throws ParseException, CustomExceptions{
+		return new ResponseEntity<Employee>(employeeService.employeeTaxApiWithRules(employee), HttpStatus.CREATED);
+	}
+
     @GetMapping("/getAllEmployees")
 	public List<Employee> getAllEmployees(){
 		return employeeService.getAllEmployees();
