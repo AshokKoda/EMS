@@ -29,12 +29,16 @@ public class Employee {
     private Date doj;
     @Column(name = "salary")
     private double salary;
+    @Column(name = "tax")
+    private double tax;
+    @Column(name = "net_salary")
+    private double netSalary;
 
     public Employee() {
     }
 
     public Employee(int employeeId, String firstName, String lastName, String email, String phoneNo, Date doj,
-            double salary) {
+            double salary, double tax, double netSalary) {
         this.employeeId = employeeId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -42,6 +46,8 @@ public class Employee {
         this.phoneNo = phoneNo;
         this.doj = doj;
         this.salary = salary;
+        this.tax = tax;
+        this.netSalary = netSalary;
     }
 
     public int getEmployeeId() {
@@ -100,10 +106,27 @@ public class Employee {
         this.salary = salary;
     }
 
+    public double getTax() {
+        return tax;
+    }
+
+    public void setTax(double tax) {
+        this.tax = tax;
+    }
+
+    public double getNetSalary() {
+        return netSalary;
+    }
+
+    public void setNetSalary(double netSalary) {
+        this.netSalary = netSalary;
+    }
+
     @Override
     public String toString() {
         return "Employee [employeeId=" + employeeId + ", firstName=" + firstName + ", lastName=" + lastName + ", email="
-                + email + ", phoneNo=" + phoneNo + ", doj=" + doj + ", salary=" + salary + "]";
+                + email + ", phoneNo=" + phoneNo + ", doj=" + doj + ", salary=" + salary + ", tax=" + tax
+                + ", netSalary=" + netSalary + "]";
     }
 
 }
