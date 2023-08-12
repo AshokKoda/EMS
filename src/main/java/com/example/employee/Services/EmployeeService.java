@@ -83,8 +83,8 @@ public class EmployeeService {
         String phoneNo = employee.getPhoneNo();
         Double salary = employee.getSalary();
 
-        Double taxDeduction = salary * 0.1;
-        Double netSalary = salary - taxDeduction;
+        Double taxDeduction = 0.0;
+        Double netSalary = salary;
 
         if (fName.isEmpty() || lName.isEmpty() || email.isEmpty() || phoneNo.isEmpty() || salary <= 0) {
             throw new CustomExceptions("Some mandatory fields are missing!.");
@@ -96,7 +96,15 @@ public class EmployeeService {
 
             if (salary <= 250000) {
                 taxDeduction = 0.0;
-                netSalary = salary;
+            } else if(salary <= 500000) {
+                taxDeduction = 0.05 * (salary - 250000); // 5%
+                netSalary = salary - taxDeduction;
+            } else if(salary <= 1000000){
+                taxDeduction = 0.05 * (500000 - 250000) + 0.10 * (salary - 500000); // 10%
+                netSalary = salary - taxDeduction;
+            } else {
+                taxDeduction = 0.05 * (500000 - 250000) + 0.10 * (1000000 - 500000) + 0.20 * (salary - 1000000); // 20%
+                netSalary = salary - taxDeduction;
             }
 
             employee.setTax(taxDeduction);
